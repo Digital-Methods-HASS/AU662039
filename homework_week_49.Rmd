@@ -1,0 +1,103 @@
+---
+title: "Homework"
+author: "Erik Luis Lanuza Oehlerich"
+date: "7/12/2021"
+output: html_document
+---
+# https://github.com/Digital-Methods-HASS/MapsWithLeaflet/commit/6590b5530582c471b94be9734a8bc28a36436d85
+## Choose favorite backgrounds in:
+# https://leaflet-extras.github.io/leaflet-providers/preview/
+## beware that some need extra options specified
+
+# First install libraries
+```{r}
+library(leaflet)
+library(htmlwidgets)
+library(tidyverse)
+library(tidyverse)
+library(googlesheets4)
+library(leaflet)
+```
+
+
+# Task 1 
+## Make a DANmap
+###
+```{r}
+DANmap <- leaflet() %>% 
+  setView(lng = 8.9044025, lat = 56.4263246, zoom = 5)
+esri <- grep("^Esri", providers, value = TRUE)
+for (provider in esri) {
+  DANmap <- DANmap %>% addProviderTiles(provider, group = provider)
+}
+
+DANmap
+```
+
+
+# load the coordinates in the map and check: are any points missing? Why?
+## no all the cordinates are still there
+
+```{r}
+gs4_deauth()
+places <- read_sheet("https://docs.google.com/spreadsheets/d/1PlxsPElZML8LZKyXbqdAYeQCDIvDps2McZx1cTVWSzI/edit#gid=124710918",
+                     col_types = "cccnncnc")
+
+glimpse(places)
+```
+# lets make a map with popups
+```{r}
+leaflet() %>% 
+  addTiles() %>% 
+  addMarkers(lng = places$Longitude, 
+             lat = places$Latitude,
+             popup = places$Description)
+```
+
+
+# Task 2: Read in the googlesheet data you and your colleagues 
+## populated with data into the DANmap object you created in Task 1.
+# se below
+# gs4_deauth()
+# places <- read_sheet("https://docs.google.com/spreadsheets/d/1PlxsPElZML8LZKyXbqdAYeQCDIvDps#2McZx1cTVWSzI/edit#gid=124710918",
+# col_types = "cccnncnc")
+# glimpse(places)
+
+# Task 3: Can you cluster the points in Leaflet? Google "clustering options in Leaflet"
+## yes i can do that, by adding the line
+## clusterOptions = markerClusterOptions(),
+## see task 1 for the reading of it 
+
+```{r}
+DANmap %>% 
+  leaflet() %>% 
+  addTiles() %>% 
+  addProviderTiles("Esri.WorldPhysical", group = "Physical") %>% 
+  addProviderTiles("Esri.WorldImagery", group = "Aerial") %>% 
+  addProviderTiles("MtbMap", group = "Geo") %>% 
+  addLayersControl(
+    baseGroups = c("CartoDB.DarkMatter","Aerial", "Physical","Geo"),
+    options = layersControlOptions(collapsed = T)) %>%
+  addMarkers( lng = places$Longitude,
+              lat = places$Latitude,
+              clusterOptions = markerClusterOptions(),
+              popup = paste("<strong>Type: </strong>",places$Type,
+                            "<br><strong>Descripition : </strong>",places$Description))
+```
+
+
+
+# Task 4: Look at the map and consider what it is good for and what not.
+## The map with the clusteroption turned on is good for getting and overview
+## the bad thing about the map is it when you hover you mouse over one marker it  
+## sometimes triangulates the wrong area.
+
+
+# Task 5: Find out how to display notes and classifications in the map.
+
+## see the code in line or downbelow.
+
+# popup = paste("<strong>Type: </strong>",places$Type,
+# "<br><strong>Descripition : </strong>",places$Description))
+
+
