@@ -1,0 +1,19 @@
+Copyright - Important - Read Me 
+
+Hello my name is Erik Luis Lanuza Oehlerich and welcome to my place.
+
+In this repository i will add all my files and code in a organised way:
+
+There is a free use of what i add of files and code as long it is for a noncomercial or a scientific use and i am creditted by my full name, somewhere public in your work:
+
+Either add "Erik Luis Lanuza Oehlerich" or you can add an abbreviation "E.L.L.O" to your document.
+
+If you want to use my code or any of my work for comercial use please contact me on my mail: eriklanuza@hotmail.com
+
+I will also be uploading a full guide complete with documentation for my work.
+
+But still please add my name somewhere in your project.  
+
+I hope that you might find something you need, or that you learn something new while looking at my files.
+
+:)
