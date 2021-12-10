@@ -1,0 +1,19 @@
+Translation of german special characters, because of R-studio not being able to read them:
+
+ü = y
+ö = ø = oe 
+ä = æ = ae
+
+Ü = Y
+Ö = Ø = Oe
+Ä = Æ = Ae
+
+Translation of special danish characters, because of R-studio not being able to read them::
+
+æ = ae 
+ø = oe
+å = aa
+
+Æ = Ae
+Ø = Oe
+Å = Aa
